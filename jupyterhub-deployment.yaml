@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyterhub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+  template:
+    metadata:
+      labels:
+        app: jupyterhub
+    spec:
+      containers:
+      - name: jupyterhub
+        image: jupyter/minimal-notebook:x86_64-ubuntu-22.04  #aashneyder/my_custom_jupyterhub:v2
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MLFLOW_S3_ENDPOINT_URL
+          value: "http://minio-service.default.svc.cluster.local:9000"
+        - name: AWS_ACCESS_KEY_ID
+          value: "minio"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "minio123"
+        - name: MLFLOW_TRACKING_URI
+          value: "http://mlflow-service.default.svc.cluster.local:5000"

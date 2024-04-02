@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jupyterhub-config
+data:
+  jupyterhub_config.py: |
+    c = get_config()
+    c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
+    c.DummyAuthenticator.password = "test"

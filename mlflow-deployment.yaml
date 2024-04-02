@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+      - name: mlflow
+        image: aashneyder/amlflow:alfa
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MLFLOW_S3_ENDPOINT_URL
+          value: "http://minio-service.default.svc.cluster.local:9000"
+        - name: AWS_ACCESS_KEY_ID
+          value: "minio"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "minio123"
+        args:
+        - "--artifacts-destination"
+        - "s3://project2"
+        - "--serve-artifacts"
+
