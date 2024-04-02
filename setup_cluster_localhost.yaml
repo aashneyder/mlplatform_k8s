@@ -1,0 +1,41 @@
+---
+- name: Deploy Kubernetes resources
+  hosts: localhost
+  connection: local 
+  tasks:
+    - name: Create kind cluster
+      command: kind create cluster --config /home/neo/project2/kind_ingress_cluster.yaml
+      become_user: neo
+      args:
+        chdir: /home/neo/project2
+
+    - name: Apply minio service
+      command: kubectl apply -f minio-service.yaml
+      become_user: neo
+      args:
+        chdir: /home/neo/project2
+
+    - name: Apply minio deployment
+      command: kubectl apply -f minio-deployment.yaml
+      become_user: neo
+      args:
+        chdir: /home/neo/project2
+
+    - name: Apply mLflow deployment
+      command: kubectl apply -f mlflow-deployment.yaml
+      become_user: neo
+      args:
+        chdir: /home/neo/project2
+
+    - name: Apply mLflow service
+      command: kubectl apply -f mlflow-service.yaml
+      become_user: neo
+      args:
+        chdir: /home/neo/project2
+
+    - name: Apply jupyterHub deployment
+      command: kubectl apply -f jupyterhub-deployment.yaml
+      become_user: neo
+      args:
+        chdir: /home/neo/project2
+
