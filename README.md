@@ -4,5 +4,5 @@
     - minio s3 storage
     - mlflow platform
     - single-user juputerlab with authentication by token
-2. ansible playbook yaml for localhost deploying installation suggests that k8s yaml files already on host and located in /home/neo/project2 directory
+2. ansible playbook yaml for localhost deploying suggests that k8s yaml files already on host and located in /home/neo/project2 directory
   
