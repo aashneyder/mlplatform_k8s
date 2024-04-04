@@ -1,0 +1,10 @@
+# host_list:
+#   hosts:
+#     host1:
+#       ansible_host: 51.250.109.243
+#       ansible_user: test        
+#       ansible_ssh_private_key_file: /root/.ssh/id_test_rsa
+      
+local_host:
+  hosts:
+    ansible_host: 127.0.0.1
